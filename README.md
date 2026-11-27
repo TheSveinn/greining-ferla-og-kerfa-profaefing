@@ -14,11 +14,12 @@ Opnaðu þá `http://127.0.0.1:8765`.
 
 ## Innihald
 
-- 232 spurningar í bankanum og 80 í hverri umferð.
-- 60 BPM-spurningar, 16 um kerfishugsun og 4 um CJM/RPA.
-- Að minnsta kosti 12 reikningsdæmi og 13 myndspurningar í hverju úrtaki.
+- 232 spurningar í bankanum; veldu 10 eða 80 spurninga umferð.
+- Heill hamur: 60 BPM-spurningar, 16 um kerfishugsun og 4 um CJM/RPA.
+- Stuttur hamur: 10 spurningar án tímamarka, 7 um BPM, 2 um kerfishugsun og 1 um CJM/RPA; að minnsta kosti 2 reikningsdæmi og 2 myndspurningar.
+- Að minnsta kosti 12 reikningsdæmi og 13 myndspurningar í hverju 80 spurninga úrtaki.
 - Nýtt slembival velur nýjar spurningar og stokkar valkostum.
-- Æfingahamur birtir skýringar eftir svar; prófhamur gefur þrjár klukkustundir og yfirferð í lokin.
+- Æfingahamur og stuttur hamur birta skýringar eftir svar; prófhamur gefur þrjár klukkustundir og yfirferð í lokin.
 - Rök, heimildatilvísanir, merking spurninga og yfirlit yfir árangur.
 
 Eitt rétt svar gefur eitt stig og ekkert er dregið niður fyrir röng svör. Svör og nýlegar niðurstöður vistast í localStorage í þeim vafra og á því veffangi sem er notað. Gögn flytjast ekki sjálfkrafa milli staðbundinnar útgáfu, Sites og GitHub Pages.
@@ -31,7 +32,7 @@ Node.js 24 eða nýrra nægir; ekki þarf að setja upp pakka.
 node validate.cjs
 ```
 
-Prófið sannreynir meðal annars 1.000 slembiúrtök, stigagjöf, efnadreifingu, heimildatilvísanir, vistun og tímamörk. Viðmótsatburðir eru hermdir án vafrastýringar. Sjónræn vafraprófun er ekki hluti af þessu prófi.
+Prófið sannreynir meðal annars 1.000 slembiúrtök í hvorum ham (10 og 80 spurningar), stigagjöf, efnadreifingu, heimildatilvísanir, vistun og tímamörk. Viðmótsatburðir eru hermdir án vafrastýringar. Sjónræn vafraprófun er ekki hluti af þessu prófi.
 
 Ef upprunalega námsefnismappan er í `../Prófsundirbúningur` má jafnframt athuga að heimildaskrár séu til:
 
