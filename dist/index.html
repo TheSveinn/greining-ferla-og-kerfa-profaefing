@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="is">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#132f36">
+  <meta name="description" content="80 spurninga prófæfing í greiningu ferla og kerfa, byggð á fyrirlestrum F1–F14 og viðbótarefni.">
+  <title>Ferlar og kerfi · Prófæfing</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="questions-bpm.js"></script>
+  <script defer src="questions-systems.js"></script>
+  <script defer src="questions-extra.js"></script>
+  <script defer src="engine.js"></script>
+  <script defer src="diagrams.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Fara í efni</a>
+  <header class="site-header">
+    <button class="brand" data-action="home" aria-label="Ferlar og kerfi, forsíða">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 20h10m10 0h10M20 5v10m0 10v10"/><path d="m20 11 9 9-9 9-9-9z"/><circle cx="5" cy="20" r="3"/><circle cx="35" cy="20" r="3"/></svg>
+      <span>Ferlar <span class="brand-light">og kerfi</span><small>IÐN301G · Prófþjálfun</small></span>
+    </button>
+    <nav aria-label="Aðalvalmynd"><button class="nav-button" data-action="home">Yfirlit</button><button class="nav-button" data-action="sources">Um efnið</button><span class="course-tag">Háskóli Íslands</span></nav>
+  </header>
+  <div id="storage-warning" class="notice" hidden>Vafrinn leyfir ekki vistun. Haltu síðunni opinni til að varðveita svörin þín.</div>
+  <main id="main" tabindex="-1"></main>
+  <footer class="site-footer"><span>Greining ferla og kerfa</span><span>Sjálfstæðar æfingar byggðar á námsefninu · Ekki opinbert próf</span></footer>
+  <dialog id="confirm-dialog" aria-labelledby="dialog-title"><h2 id="dialog-title"></h2><p id="dialog-message"></p><div class="dialog-actions"><button class="button secondary" id="dialog-cancel">Hætta við</button><button class="button" id="dialog-ok">Staðfesta</button></div></dialog>
+  <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+  <noscript><p class="notice">Virkja þarf JavaScript til að nota prófæfinguna.</p></noscript>
+</body>
+</html>

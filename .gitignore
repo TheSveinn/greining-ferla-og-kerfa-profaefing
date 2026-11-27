@@ -1,0 +1,13 @@
+# Staðbundin gögn, aðgangsupplýsingar og vinnuskrár eiga ekki heima í geymslunni.
+node_modules/
+.env
+.env.*
+!.env.example
+.openai/
+.DS_Store
+Thumbs.db
+tmp/
+*.log
+*.pdf
+*.pptx
+*.docx
