@@ -1,6 +1,6 @@
 # Prófæfing í greiningu ferla og kerfa
 
-Gagnvirk íslensk prófæfing byggð á fyrirlestrum F1–F14 og viðbótarefni námskeiðsins IÐN301G. Spurningarnar eru sjálfstæð æfingadæmi, ekki opinberar prófspurningar.
+Gagnvirk íslensk prófæfing byggð á fyrirlestrum F1–F14 og viðbótarefni námskeiðsins IÐN301G, auk opins námsefnis sem tengist kennslubókunum. Spurningarnar eru sjálfstæð æfingadæmi, ekki opinberar prófspurningar.
 
 ## Notkun
 
@@ -14,15 +14,24 @@ Opnaðu þá `http://127.0.0.1:8765`.
 
 ## Innihald
 
-- 232 spurningar í bankanum; veldu 10 eða 80 spurninga umferð.
+- 304 spurningar í bankanum; veldu 10 eða 80 spurninga umferð.
 - Heill hamur: 60 BPM-spurningar, 16 um kerfishugsun og 4 um CJM/RPA.
 - Stuttur hamur: 10 spurningar án tímamarka, 7 um BPM, 2 um kerfishugsun og 1 um CJM/RPA; að minnsta kosti 2 reikningsdæmi og 2 myndspurningar.
 - Að minnsta kosti 12 reikningsdæmi og 13 myndspurningar í hverju 80 spurninga úrtaki.
 - Nýtt slembival velur nýjar spurningar og stokkar valkostum.
 - Æfingahamur og stuttur hamur birta skýringar eftir svar; prófhamur gefur þrjár klukkustundir og yfirferð í lokin.
 - Rök, heimildatilvísanir, merking spurninga og yfirlit yfir árangur.
+- 72 nýjar spurningar tengdar bókaefni: 48 um BPM og 24 um kerfishugsun, með beinum heimildatenglum.
 
 Eitt rétt svar gefur eitt stig og ekkert er dregið niður fyrir röng svör. Svör og nýlegar niðurstöður vistast í localStorage í þeim vafra og á því veffangi sem er notað. Gögn flytjast ekki sjálfkrafa milli staðbundinnar útgáfu, Sites og GitHub Pages.
+
+## Bókaefni og heimildir
+
+BPM-viðbótin byggir á opinberum kennsluglærum höfunda fyrir kafla 1–12: M. Dumas, M. La Rosa, J. Mendling og H. A. Reijers, *Fundamentals of Business Process Management*, 2. útgáfa, Springer, 2018. Kennsluefnið er aðgengilegt á [fylgivef bókarinnar](https://fundamentals-of-bpm.org/supplementary-material/) undir CC BY-leyfi.
+
+Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018.
+
+Kerfisviðbótin byggir á aðgengilegum útdráttum úr *Thinking in Systems* og tengdum greinum Donella Meadows. Í yfirferð hvers svars er aðgreint hvort heimildin sé kennsluglærur, bókarútdráttur eða grein höfundar, með tengli og staðsetningu. Þetta eru sjálfstæð æfingadæmi, ekki afrituð bókardæmi eða yfirferð beggja bóka í heild.
 
 ## Prófanir
 
@@ -52,7 +61,7 @@ GitHub-aðgangurinn þarf að styðja Pages fyrir valið sýnileikastig geymslun
 - `dist/engine.js`: slembival, stigagjöf og gögn um umferð.
 - `dist/diagrams.js`: SVG-teikningar fyrir BPMN og orsakasamhengi.
 - `dist/app.js`: viðmót, tímamörk, vistun og yfirferð.
-- `sources.json`: aðeins heiti og blaðsíðufjöldi heimilda.
+- `sources.json`: heiti, blaðsíðufjöldi og lýsigögn heimilda; beinir tenglar að opnu bókaefni.
 - `validate.cjs`: sjálfvirkar prófanir.
 
 Frumglærur, kennslubækur og persónulegar staðbundnar slóðir fylgja ekki geymslunni.

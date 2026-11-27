@@ -3,22 +3,56 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const source=path.resolve(__dirname,'../Prófsundirbúningur');
 const checkLocalSources=process.argv.includes('--local-sources');
 const context=vm.createContext({console});
-const scripts=['questions-bpm.js','questions-systems.js','questions-extra.js','engine.js','diagrams.js'];
+const scripts=['questions-bpm.js','questions-systems.js','questions-extra.js','questions-books-bpm.js','questions-books-systems.js','engine.js','diagrams.js'];
 for(const file of scripts)vm.runInContext(fs.readFileSync(path.join(__dirname,'dist',file),'utf8'),context,{filename:file});
-const bank=[...context.BPM_QUESTIONS,...context.SYSTEMS_QUESTIONS,...context.EXTRA_QUESTIONS],E=context.ExamEngine;
+const books=[...context.BOOK_BPM_QUESTIONS,...context.BOOK_SYSTEMS_QUESTIONS];
+const bank=[...context.BPM_QUESTIONS,...context.SYSTEMS_QUESTIONS,...context.EXTRA_QUESTIONS,...books],E=context.ExamEngine;
 // Lýsigögn fylgja geymslunni svo CI þurfi ekki einkaskrár eða staðbundnar slóðir.
 const manifest=JSON.parse(fs.readFileSync(path.resolve(__dirname,'sources.json'),'utf8'));
 const pageCounts=new Map(manifest.map(m=>[m.file,m.pages]));
-assert(bank.length>=200);assert.equal(new Set(bank.map(q=>q.id)).size,bank.length);
-for(const q of bank){assert(q.stem.length>15,q.id);assert.equal(q.options.length,4,q.id);assert.equal(new Set(q.options).size,4,q.id);assert(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<4,q.id);assert(q.explanation.length>30,q.id);assert(['bpm','systems','extra'].includes(q.group),q.id);assert(pageCounts.has(q.source.file),`${q.id}: heimild vantar í lýsigögn`);if(checkLocalSources)assert(fs.existsSync(path.join(source,q.source.file)),`${q.id}: staðbundna heimild vantar`);for(const page of q.source.pages)assert(Number.isInteger(page)&&page>0&&page<=pageCounts.get(q.source.file),`${q.id}: ógild blaðsíða ${page}`);if(q.kind==='diagram')assert(q.diagram,`${q.id}: mynd vantar`);if(q.diagram)assert(context.ExamDiagrams.render(q.diagram).includes('<svg'),q.id);}
-const original=new Map(bank.map(q=>[q.id,q]));let previous=[],novel=0;const answerPositions=[0,0,0,0];
+const sourceMetadata=new Map(manifest.map(m=>[m.file,m]));
+assert.equal(sourceMetadata.size,manifest.length);
+assert.equal(books.length,72);assert.equal(context.BOOK_BPM_QUESTIONS.length,48);assert.equal(context.BOOK_SYSTEMS_QUESTIONS.length,24);
+assert.equal(bank.length,304);assert.equal(new Set(bank.map(q=>q.id)).size,bank.length);
+assert.equal(new Set(bank.map(q=>q.stem.toLocaleLowerCase('is').replace(/\s+/g,' ').trim())).size,bank.length,'Tvítekin spurning');
+for(const q of bank){
+  assert(q.stem.length>15,q.id);assert.equal(q.options.length,4,q.id);assert.equal(new Set(q.options).size,4,q.id);
+  assert(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<4,q.id);assert(q.explanation.length>30,q.id);
+  assert(['bpm','systems','extra'].includes(q.group),q.id);assert(pageCounts.has(q.source.file),`${q.id}: heimild vantar í lýsigögn`);
+  const metadata=sourceMetadata.get(q.source.file);
+  if(q.origin==='book-material'){
+    assert(['book-companion','book-excerpt','author-essay'].includes(q.source.type),q.id);
+    assert.equal(q.source.url,metadata.url,q.id);assert.equal(q.source.type,metadata.type,q.id);
+    assert(/^https:\/\/[^\s]+$/.test(q.source.url),q.id);assert(new URL(q.source.url).hostname,q.id);
+    assert(q.source.locator?.length>5,`${q.id}: staðsetningu í heimild vantar`);
+    if(q.source.type==='book-companion'){
+      assert(Number.isInteger(metadata.slides)&&metadata.slides>0,`${q.id}: fjöldi glæra vantar`);
+      assert(Array.isArray(q.source.slides)&&q.source.slides.length,`${q.id}: glærutilvísun vantar`);
+      for(const slide of q.source.slides)assert(Number.isInteger(slide)&&slide>0&&slide<=metadata.slides,`${q.id}: ógild glæra ${slide}`);
+    }
+  }else if(checkLocalSources)assert(fs.existsSync(path.join(source,q.source.file)),`${q.id}: staðbundna heimild vantar`);
+  assert(Array.isArray(q.source.pages),q.id);
+  for(const page of q.source.pages)assert(Number.isInteger(page)&&page>0&&page<=pageCounts.get(q.source.file),`${q.id}: ógild blaðsíða ${page}`);
+  if(q.kind==='diagram')assert(q.diagram,`${q.id}: mynd vantar`);
+  if(q.diagram){
+    assert(['branch','loop','symbol'].includes(q.diagram.type),`${q.id}: óþekkt myndsnið`);
+    const image=context.ExamDiagrams.render(q.diagram);assert(image.includes('<svg'),q.id);
+    assert(!image.includes('Tákn vantar')&&!image.includes('undefined'),`${q.id}: mynd er ófullgerð`);
+  }
+}
+for(const q of books)assert.equal(q.origin,'book-material',q.id);
+for(const lecture of ['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F13','F14'])assert.equal(context.BOOK_BPM_QUESTIONS.filter(q=>q.lecture===lecture).length,4);
+for(const q of context.BOOK_SYSTEMS_QUESTIONS)assert(['F11','F12'].includes(q.lecture),q.id);
+const html=fs.readFileSync(path.join(__dirname,'dist/index.html'),'utf8');
+for(const file of scripts)assert(html.includes(`src="${file}"`),`Vefurinn hleður ekki ${file}`);
+const original=new Map(bank.map(q=>[q.id,q])),seenLong=new Set(),seenQuick=new Set();let previous=[],novel=0;const answerPositions=[0,0,0,0];
 for(let i=0;i<1000;i++){
   const qs=E.draw(bank,'prufa-'+i,previous);assert.equal(qs.length,80);assert.equal(new Set(qs.map(q=>q.id)).size,80);
   for(const [group,n]of [['bpm',60],['systems',16],['extra',4]])assert.equal(qs.filter(q=>q.group===group).length,n);
   for(const lecture of ['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F13','F14'])assert(qs.filter(q=>q.lecture===lecture).length>=2);
   assert(qs.filter(q=>q.kind==='calculation').length>=12);assert(qs.filter(q=>q.kind==='diagram').length>=13);
   assert(qs.filter(q=>q.lecture==='CJM').length===2);assert(qs.filter(q=>q.lecture==='RPA').length===2);
-  for(const q of qs){const base=original.get(q.id);assert.equal(q.options[q.answer],base.options[base.answer]);answerPositions[q.answer]++;}
+  for(const q of qs){const base=original.get(q.id);assert.equal(q.options[q.answer],base.options[base.answer]);answerPositions[q.answer]++;seenLong.add(q.id);}
   if(i){const n=qs.filter(q=>!previous.includes(q.id)).length;assert(n>=40,`Of lítil nýbreytni: ${n}`);novel+=n;}
   previous=qs.map(q=>q.id);
 }
@@ -33,9 +67,11 @@ for(let i=0;i<1000;i++){
   for(const lecture of ['F11','F12'])assert.equal(qs.filter(q=>q.lecture===lecture).length,1);
   assert(qs.filter(q=>q.kind==='calculation').length>=2);assert(qs.filter(q=>q.kind==='diagram').length>=2);
   assert(qs.every(q=>!quickPrevious.includes(q.id)));
-  for(const q of qs){const base=original.get(q.id);assert.equal(q.options[q.answer],base.options[base.answer]);}
+  for(const q of qs){const base=original.get(q.id);assert.equal(q.options[q.answer],base.options[base.answer]);seenQuick.add(q.id);}
   quickPrevious=qs.map(q=>q.id);
 }
+// Sérhver viðbót þarf að geta komið fram í báðum hamum, ekki aðeins verið hlaðin í minni.
+for(const q of books){assert(seenLong.has(q.id),q.id);assert(seenQuick.has(q.id),q.id);}
 const shortSession=E.newSession(bank,'quick','stutt-stig');
 assert(E.validSession(shortSession));assert.equal(E.timeLeft(shortSession),null);
 assert(!E.validSession({...shortSession,index:10}));assert(!E.validSession({...shortSession,mode:'exam'}));
@@ -85,5 +121,23 @@ assert(quickRestored.state.session.questions.every(q=>!priorIds.includes(q.id)))
 quickRestored.click('home');quickRestored.mode('study');assert(quickRestored.nodes.selected.textContent.includes('80 spurningar'));
 quickRestored.click('start');assert(quickRestored.nodes['dialog-message'].textContent.includes('80 spurningum'));quickRestored.ok();assert.equal(quickRestored.state.session.questions.length,80);
 quickRestored.click('home');quickRestored.mode('quick');quickRestored.click('start');assert(quickRestored.nodes['dialog-message'].textContent.includes('10 spurningum'));quickRestored.ok();assert.equal(quickRestored.state.session.questions.length,10);
+// Bókaheimildir birtast við yfirferð, með réttri tegund, staðsetningu og öruggum tengli.
+for(const [type,label]of [['book-companion','Kennsluglærur bókarhöfunda'],['book-excerpt','Útdráttur úr bók'],['author-essay','Grein höfundar']]){
+  const item=books.find(q=>q.source.type===type);assert(item,`Heimildartegund vantar: ${type}`);
+  const saved=E.newSession(bank.filter(q=>q.id!==item.id),'quick','heimild-'+type);
+  saved.questions[0]=item;
+  const store={'ferlar-prof-v1':JSON.stringify({session:saved})},sourceUi=boot(store);
+  sourceUi.click('resume');assert(!sourceUi.html().includes(`href="${item.source.url}"`));
+  sourceUi.answer(item.answer);sourceUi.click('check');
+  assert(sourceUi.html().includes(`href="${item.source.url.replaceAll('&','&amp;')}"`));
+  assert(sourceUi.html().includes(label));assert(sourceUi.html().includes(item.source.locator));
+  assert(sourceUi.html().includes('rel="noopener noreferrer"'));
+}
+const overview=boot();overview.click('sources');assert(overview.html().includes('72 spurningar tengjast bókaefni'));
+assert(overview.html().includes('Kennsluglærur bókarhöfunda'));assert(overview.html().includes('Útdráttur úr bók'));assert(overview.html().includes('Grein höfundar'));
+// Eldri vistanir hafa hvorki netfang né tegund heimildar og verða áfram læsilegar.
+const legacy=E.newSession(bank.filter(q=>q.origin!=='book-material'),'quick','eldri-vistun');
+legacy.answers[legacy.questions[0].id]=legacy.questions[0].answer;legacy.revealed[legacy.questions[0].id]=true;
+const legacyUi=boot({'ferlar-prof-v1':JSON.stringify({session:legacy})});legacyUi.click('resume');assert(legacyUi.html().includes('Heimild:'));
 const counts={};for(const q of bank){counts[q.lecture]=(counts[q.lecture]||0)+1;}
 console.log(JSON.stringify({passed:true,total:bank.length,byLecture:counts,calculation:bank.filter(q=>q.kind==='calculation').length,diagram:bank.filter(q=>q.kind==='diagram').length,drawTests:1000,quickDrawTests:1000,averageNew:Number((novel/999).toFixed(1)),answerPositions,flows:['study','exam','quick','grading','shuffling','restore','flags','new-draw','review-filters','timeout','timeout-on-reopen','quick-restore','quick-no-deadline','mode-switch']},null,2));

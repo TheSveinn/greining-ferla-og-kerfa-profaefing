@@ -90,5 +90,125 @@
   {
     "file": "SIPOC_sniðmát_ppt (1).pptx",
     "pages": 2
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 1 · kennsluglærur",
+    "pages": null,
+    "slides": 38,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter01-Introduction.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 2 · kennsluglærur",
+    "pages": null,
+    "slides": 45,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter-02-ProcessIdentification.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 3 · kennsluglærur",
+    "pages": null,
+    "slides": 92,
+    "url": "https://kodu.ut.ee/~dumas/downloads/FBPM2-Chapter03-EssentialProcessModeling.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 4 · kennsluglærur",
+    "pages": null,
+    "slides": 84,
+    "url": "https://kodu.ut.ee/~dumas/downloads/FBPM2-Chapter04-AdvancedProcessModeling.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 5 · kennsluglærur",
+    "pages": null,
+    "slides": 82,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2020/11/FBPM2-Chapter05-ProcessDiscovery.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 6 · kennsluglærur",
+    "pages": null,
+    "slides": 51,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2018/05/Fundamentals-of-BPM-2nd-Edition-Chapter-06-Qualitative-Process-Analysis.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 7 · kennsluglærur",
+    "pages": null,
+    "slides": 66,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter07-QuantitativeProcessAnalysis.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 8 · kennsluglærur",
+    "pages": null,
+    "slides": 43,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter08-ProcessRedesign.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 9 · kennsluglærur",
+    "pages": null,
+    "slides": 34,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter09-ProcessAwareInformationSystems.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 10 · kennsluglærur",
+    "pages": null,
+    "slides": 25,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter10-ProcessImplementationExecutableModels.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 11 · kennsluglærur",
+    "pages": null,
+    "slides": 83,
+    "url": "https://kodu.ut.ee/~dumas/downloads/FBPM2-Chapter11-ProcessMonitoring.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Fundamentals of BPM · kafli 12 · kennsluglærur",
+    "pages": null,
+    "slides": 26,
+    "url": "https://fundamentals-of-bpm.org/wp-content/uploads/2013/02/FBPM2-Chapter12-BPMEnterpriseCapability.pptx",
+    "type": "book-companion",
+    "credit": "Source: M. Dumas, M. La Rosa, J. Mendling and H. Reijers, Fundamentals of Business Process Management, 2nd edition, Springer, 2018."
+  },
+  {
+    "file": "Thinking in Systems · útdráttur úr kafla 4",
+    "pages": 16,
+    "url": "https://www.gc.soton.ac.uk/files/2015/01/Thinking-in-Systems-A-Primer-Donella-H.-Meadows-112-127.pdf",
+    "type": "book-excerpt"
+  },
+  {
+    "file": "Thinking in Systems · Bathtubs 101, handritsútdráttur",
+    "pages": 9,
+    "url": "https://donellameadows.org/wp-content/userfiles/bathtubs101.pdf",
+    "type": "book-excerpt"
+  },
+  {
+    "file": "Donella Meadows · Leverage Points (höfundargrein)",
+    "pages": 21,
+    "url": "https://donellameadows.org/wp-content/userfiles/Leverage_Points.pdf",
+    "type": "author-essay"
+  },
+  {
+    "file": "Donella Meadows · Dancing With Systems (höfundargrein)",
+    "pages": null,
+    "url": "https://donellameadows.org/archives/dancing-with-systems/",
+    "type": "author-essay"
   }
 ]
